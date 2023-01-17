@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         {
             IdleEvent?.Invoke();
         }
-
+        
         transform.position += Vector3.right * (horInput * (Time.deltaTime * movementSpeed));
     }
 

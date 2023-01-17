@@ -11,11 +11,13 @@ public class CollectableGenerator : MonoBehaviour
     #region Variables
     
     // Public Variables
-    public static Action OnCollectableCollected;
+    public static Action OnCollectableCollected, OnNewWaveStarted;
+    public static int IncreaseWaveCollectableTime => st_increaseWaveCollectableTime;
     
     // Private Variables
     [SerializeField] private Vector2 horizontalBoundary, verticalBoundary;
     [SerializeField] private CollectableController collectableController;
+    [Tooltip("It increasing collectable count per wave after reached this amount of wave"), SerializeField] private int increaseWaveCollectableTime = 7;
 
     private Vector3 _targetSpawnPos;
 
@@ -23,6 +25,8 @@ public class CollectableGenerator : MonoBehaviour
     private int _generatedCollectableCount;
     private int _collectedCollectableCount;
     private int _sameTimeCollectableCountIncreaseValue;
+    
+    private static int st_increaseWaveCollectableTime;
 
     #endregion Variables
     
@@ -30,9 +34,11 @@ public class CollectableGenerator : MonoBehaviour
     {
         _sameTimeCollectableCount = 1;
         _sameTimeCollectableCountIncreaseValue = 1;
+
+        st_increaseWaveCollectableTime = increaseWaveCollectableTime;
         
         GenerateCollectable();
-
+        
         OnCollectableCollected += () =>
         {
             _collectedCollectableCount++;
@@ -41,6 +47,8 @@ public class CollectableGenerator : MonoBehaviour
             {
                 return;
             }
+            
+            OnNewWaveStarted?.Invoke();
             
             for (int i = 0; i < _sameTimeCollectableCount; i++)
             {
@@ -54,6 +62,7 @@ public class CollectableGenerator : MonoBehaviour
     private void OnDestroy()
     {
         OnCollectableCollected = null;
+        OnNewWaveStarted = null;
     }
 
     private async void GenerateCollectable()
@@ -64,7 +73,7 @@ public class CollectableGenerator : MonoBehaviour
 
         _generatedCollectableCount++;
 
-        if (_generatedCollectableCount >= _sameTimeCollectableCountIncreaseValue * 7)
+        if (_generatedCollectableCount >= _sameTimeCollectableCountIncreaseValue * increaseWaveCollectableTime + 1)
         {
             _sameTimeCollectableCount++;
             _sameTimeCollectableCountIncreaseValue++;

@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioGroup collectedCollectable;
     [SerializeField] private AudioGroup jump;
     [SerializeField] private AudioGroup landing;
+    [SerializeField] private AudioGroup newWaveStarted;
     
     [Header("Audio Clips")]
     [SerializeField] private AudioClip sliding;
@@ -24,6 +25,7 @@ public class AudioManager : MonoBehaviour
         PlayerMovement.JumpEvent += () => AudioReactor.PlaySfx(jump);
         PlayerMovement.LandEvent += () => AudioReactor.PlaySfx(landing);
         CollectableGenerator.OnCollectableCollected += () => AudioReactor.PlaySfx(collectedCollectable);
+        CollectableGenerator.OnNewWaveStarted += () => AudioReactor.PlaySfx(newWaveStarted);
     }
 
     private void Update()

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d453a5a663dbc240b6f1aa14f0828bb, type: 3}
-  m_Name: Landing
+  m_Name: NewWaveStarted
   m_EditorClassIdentifier: 
   audio_clips:
-  - {fileID: 8300000, guid: dfe9f11e0c04c9f44a87a128569327da, type: 3}
+  - {fileID: 8300000, guid: d3f0e88215f5f9b4e96f1df1fa5f6300, type: 3}
   pitch_min: 0.9
-  pitch_max: 1.1
-  vol_min: 0.9
-  vol_max: 1.1
+  pitch_max: 1
+  vol_min: 1
+  vol_max: 1
   incrementalPitchSteps: 0
   incrementalPitchCountdown: 0

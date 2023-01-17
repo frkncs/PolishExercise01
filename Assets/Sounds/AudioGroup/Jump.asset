@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d412f3fccdb69634384971588285ead4, type: 3}
   pitch_min: 0.9
   pitch_max: 1.1
-  vol_min: 0.9
-  vol_max: 1.1
+  vol_min: 1
+  vol_max: 1
   incrementalPitchSteps: 0
   incrementalPitchCountdown: 0
