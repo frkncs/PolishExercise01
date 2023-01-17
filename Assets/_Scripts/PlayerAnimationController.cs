@@ -45,11 +45,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void SignUpEvents()
     {
-        PlayerMovement.PlayMoveIdleEvent += PlayMoveIdleAnim;
-        PlayerMovement.PlayMoveRightEvent += PlayMoveRightAnim;
-        PlayerMovement.PlayMoveLeftEvent += PlayMoveLeftAnim;
-        PlayerMovement.PlayJumpEvent += PlayJumpAnim;
-        PlayerMovement.PlayLandEvent += PlayLandAnim;
+        PlayerMovement.IdleEvent += PlayMoveIdleAnim;
+        PlayerMovement.MoveRightEvent += PlayMoveRightAnim;
+        PlayerMovement.MoveLeftEvent += PlayMoveLeftAnim;
+        PlayerMovement.JumpEvent += PlayJumpAnim;
+        PlayerMovement.LandEvent += PlayLandAnim;
     }
 
     private void PlayMoveIdleAnim()

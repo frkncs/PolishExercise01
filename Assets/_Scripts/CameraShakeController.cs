@@ -15,7 +15,7 @@ public class CameraShakeController : MonoBehaviour
     
     private void Start()
     {
-        PlayerMovement.PlayLandEvent += Shake;
+        PlayerMovement.LandEvent += Shake;
     }
 
     private void Shake()

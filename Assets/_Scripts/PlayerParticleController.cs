@@ -17,7 +17,7 @@ public class PlayerParticleController : MonoBehaviour
     // Public Variables
 
     // Private Variables
-    [SerializeField] private GameObject rightRunParticle, leftRunParticle, jumpParticle, landParticle;
+    [SerializeField] private ParticleSystem rightRunParticle, leftRunParticle, jumpParticle, landParticle;
 
     private RunParticleType _currentPlayingRunParticle;
 
@@ -30,19 +30,19 @@ public class PlayerParticleController : MonoBehaviour
 
     private void SignUpEvents()
     {
-        PlayerMovement.PlayMoveRightEvent += PlayRightRunParticle;
-        PlayerMovement.PlayMoveLeftEvent += PlayLeftRunParticle;
-        PlayerMovement.PlayJumpEvent += PlayJumpParticle;
-        PlayerMovement.PlayLandEvent += PlayLandParticle;
-        PlayerMovement.PlayMoveIdleEvent += StopAllParticles;
+        PlayerMovement.MoveRightEvent += PlayRightRunParticle;
+        PlayerMovement.MoveLeftEvent += PlayLeftRunParticle;
+        PlayerMovement.JumpEvent += PlayJumpParticle;
+        PlayerMovement.LandEvent += PlayLandParticle;
+        PlayerMovement.IdleEvent += StopAllParticles;
     }
 
     private void StopAllParticles()
     {
-        rightRunParticle.SetActive(false);
-        leftRunParticle.SetActive(false);
-        jumpParticle.SetActive(false);
-        landParticle.SetActive(false);
+        rightRunParticle.Stop();
+        leftRunParticle.Stop();
+        jumpParticle.Stop();
+        landParticle.Stop();
 
         _currentPlayingRunParticle = RunParticleType.None;
     }
@@ -56,8 +56,8 @@ public class PlayerParticleController : MonoBehaviour
 
         _currentPlayingRunParticle = RunParticleType.RightRun;
 
-        leftRunParticle.SetActive(false);
-        rightRunParticle.SetActive(true);
+        leftRunParticle.Stop();
+        rightRunParticle.Play();
     }
 
     private void PlayLeftRunParticle()
@@ -69,19 +69,19 @@ public class PlayerParticleController : MonoBehaviour
 
         _currentPlayingRunParticle = RunParticleType.LeftRun;
 
-        rightRunParticle.SetActive(false);
-        leftRunParticle.SetActive(true);
+        rightRunParticle.Stop();
+        leftRunParticle.Play();
     }
 
     private void PlayJumpParticle()
     {
         _currentPlayingRunParticle = RunParticleType.None;
-        jumpParticle.SetActive(true);
+        jumpParticle.Emit(30);
     }
 
     private void PlayLandParticle()
     {
         _currentPlayingRunParticle = RunParticleType.None;
-        jumpParticle.SetActive(true);
+        landParticle.Emit(30);
     }
 }

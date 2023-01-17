@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     #region Variables
 
     // Public Variables
-    public static Action PlayMoveIdleEvent, PlayMoveRightEvent, PlayMoveLeftEvent, PlayJumpEvent, PlayLandEvent;
+    public static Action IdleEvent, MoveRightEvent, MoveLeftEvent, JumpEvent, LandEvent;
 
     // Private Variables
     [SerializeField] private float movementSpeed = 8;
@@ -47,17 +47,17 @@ public class PlayerMovement : MonoBehaviour
         {
             _jumpCount = 0;
 
-            PlayLandEvent?.Invoke();
+            LandEvent?.Invoke();
         }
     }
 
     private void OnDestroy()
     {
-        PlayMoveIdleEvent = null;
-        PlayMoveRightEvent = null;
-        PlayMoveLeftEvent = null;
-        PlayJumpEvent = null;
-        PlayLandEvent = null;
+        IdleEvent = null;
+        MoveRightEvent = null;
+        MoveLeftEvent = null;
+        JumpEvent = null;
+        LandEvent = null;
     }
 
     private void Move()
@@ -66,15 +66,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (horInput > 0)
         {
-            PlayMoveRightEvent?.Invoke();
+            MoveRightEvent?.Invoke();
         }
         else if (horInput < 0)
         {
-            PlayMoveLeftEvent?.Invoke();
+            MoveLeftEvent?.Invoke();
         }
         else
         {
-            PlayMoveIdleEvent?.Invoke();
+            IdleEvent?.Invoke();
         }
 
         transform.position += Vector3.right * (horInput * (Time.deltaTime * movementSpeed));
@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
             _rb.AddForce(Vector3.up * jumpForce);
             _jumpCount++;
 
-            PlayJumpEvent?.Invoke();
+            JumpEvent?.Invoke();
         }
     }
 
